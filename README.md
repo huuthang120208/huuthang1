@@ -5,8 +5,8 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
 UserSettings():GetService('UserGameSettings').MasterVolume = 0;
 settings().Rendering.QualityLevel = 1;
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,false)
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,true)
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,true)
 game:GetService("Lighting").GlobalShadows = false
 for key, object in pairs(workspace:GetDescendants()) do
     if object:IsA("Part") or object:IsA("UnionOperation") or object:IsA("MeshPart") then
@@ -68,7 +68,7 @@ _G.Races_Settings = { -- ตั้งค่าเผ่า
             ["Races"] = { -- Select Races U want
                 ["Mink"] = true,
                 ["Human"] = true,
-                ["Fishman"] = true,
+                ["Fishman"] = false,
             },
             ["RerollsWhenFragments"] = 20000 -- Random Races When Your Fragments is >= Settings
         }
