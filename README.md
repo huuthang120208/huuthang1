@@ -5,8 +5,8 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
 UserSettings():GetService('UserGameSettings').MasterVolume = 0;
 settings().Rendering.QualityLevel = 1;
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,true)
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,true)
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,false)
 game:GetService("Lighting").GlobalShadows = false
 for key, object in pairs(workspace:GetDescendants()) do
     if object:IsA("Part") or object:IsA("UnionOperation") or object:IsA("MeshPart") then
@@ -63,7 +63,7 @@ _G.Team = "Pirate" -- Marine / Pirate
 _G.MainSettings = {
         ["EnabledHOP"] = true, -- เปิด HOP ( มันไม่มีอยู่ละใส่มาเท่ๆ )
         ['FPSBOOST'] = true, -- ภาพกาก
-        ["FPSLOCKAMOUNT"] = 15, -- จำนวน FPS
+        ["FPSLOCKAMOUNT"] = 10, -- จำนวน FPS
         ['WhiteScreen'] = false, -- จอขาว
         ['CloseUI'] = true, -- ปิด Ui
         ["NotifycationExPRemove"] = true, -- ลบ ExP ที่เด้งตอนฆ่ามอน
