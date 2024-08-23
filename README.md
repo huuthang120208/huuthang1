@@ -1,23 +1,3 @@
-repeat task.wait(5) until game:IsLoaded(3)
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
-repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
-UserSettings():GetService('UserGameSettings').MasterVolume = 0;
-settings().Rendering.QualityLevel = 1;
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,false)
-game:GetService("Lighting").GlobalShadows = false
-for key, object in pairs(workspace:GetDescendants()) do
-    if object:IsA("Part") or object:IsA("UnionOperation") or object:IsA("MeshPart") then
-        object.Material = Enum.Material.SmoothPlastic
-    elseif  (object:IsA("Texture") or object:IsA("Explosion") or object:IsA("ColorCorrectionEffect") or 
-                object:IsA("Atmosphere") or object:IsA("SunRaysEffect") or object:IsA("BlurEffect") or 
-                object:IsA("RainyStone") or object:IsA("Weather")  or object:IsA("BloomEffect")
-                or object:IsA("Lighting") or object:IsA("FogEnd") or object:IsA("DepthOfFieldEffect")) then
-        object:Destroy()
-    end
-end
 for i,v in next, workspace:GetDescendants() do
     pcall(function()
         v.Transparency = 1
