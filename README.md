@@ -1,3 +1,23 @@
+repeat task.wait(5) until game:IsLoaded(3)
+repeat task.wait() until game.Players
+repeat task.wait() until game.Players.LocalPlayer
+repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
+UserSettings():GetService('UserGameSettings').MasterVolume = 0;
+settings().Rendering.QualityLevel = 1;
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,false)
+game:GetService("Lighting").GlobalShadows = false
+for key, object in pairs(workspace:GetDescendants()) do
+    if object:IsA("Part") or object:IsA("UnionOperation") or object:IsA("MeshPart") then
+        object.Material = Enum.Material.SmoothPlastic
+    elseif  (object:IsA("Texture") or object:IsA("Explosion") or object:IsA("ColorCorrectionEffect") or 
+                object:IsA("Atmosphere") or object:IsA("SunRaysEffect") or object:IsA("BlurEffect") or 
+                object:IsA("RainyStone") or object:IsA("Weather")  or object:IsA("BloomEffect")
+                or object:IsA("Lighting") or object:IsA("FogEnd") or object:IsA("DepthOfFieldEffect")) then
+        object:Destroy()
+    end
+end
 for i,v in next, workspace:GetDescendants() do
     pcall(function()
         v.Transparency = 1
@@ -17,23 +37,6 @@ a.DescendantAdded:Connect(function(v)
         v.Transparency = 1
     end)
 end)
-settings().Rendering.QualityLevel = 1
-settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
-game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
-UserSettings():GetService('UserGameSettings').MasterVolume = 0
-game.StarterGui:SetCore("TopbarEnabled", false)
-game.StarterGui:SetCore("DevConsoleVisible", false)
-game.StarterGui:SetCoreGuiEnabled("Enum.CoreGuiType.PlayerList",false)
-game.StarterGui:SetCoreGuiEnabled("Enum.CoreGuiType.All",false)
-local lighting = game:GetService("Lighting")
-lighting.GlobalShadows = false
-lighting.Outlines = false
-lighting.Brightness = 1
-lighting.FogEnd = 1000
-lighting.FogStart = 100
-lighting.BaseAtmosphere:Destroy()
-lighting.Sky:Destroy()
-lighting.LightingLayers:Destroy()
 _G.WebHook = {
     ["Enabled"] = false, -- เปิดการใช้งาน
     ["Url"] = "", -- ลิ้งค์เว็บฮุก
