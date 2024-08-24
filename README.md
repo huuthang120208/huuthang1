@@ -44,6 +44,19 @@ _G.MainSettings = {
             [8] = "Spirit-Spirit",
             [9] = "Venom-Venom",
             [10] = "Kitsune-Kitsune",
+            [11] = "T-Rex-T-Rex",
+            [12] = "Mammoth-Mammoth",
+            [13] = "Gravity-Gravity",
+            [14] = "Blizzard-Blizzard",
+            [15] = "Pain-Pain",
+            [16] = "Rumble-Rumble",
+            [17] = "Portal-Portal",
+            [18] = "Phoenix-Phoenix",
+            [19] = "Sound-Sound",
+            [20] = "Spider-Spider",
+            [21] = "Love-Love",
+            [22] = "Buddha-Buddha",
+            [23] = "Quake-Quake"
         }
     }
 _G.Fruits_Settings = { -- ตั้งค่าผล
