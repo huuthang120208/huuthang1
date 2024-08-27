@@ -33,7 +33,7 @@ _G.MainSettings = {
         ['CloseUI'] = true, -- ปิด Ui
         ["NotifycationExPRemove"] = true, -- ลบ ExP ที่เด้งตอนฆ่ามอน
         ['AFKCheck'] = 540, -- ถ้ายืนนิ่งเกินวิที่ตั้งมันจะรีเกม
-        ["LockFragments"] = 15000, -- ล็อคเงินม่วง
+        ["LockFragments"] = 20000, -- ล็อคเงินม่วง
         ["LockFruitsRaid"] = { -- ล็อคผลที่ไม่เอาไปลงดัน
             [1] = "Dough-Dough",
             [2] = "Dragon-Dragon",
@@ -81,7 +81,7 @@ _G.Races_Settings = { -- ตั้งค่าเผ่า
         ["Races_Lock"] = {
             ["Races"] = { -- Select Races U want
                 ["Mink"] = true,
-                ["Human"] = true,
+                ["Human"] = false,
                 ["Fishman"] = false,
             },
             ["RerollsWhenFragments"] = 20000 -- Random Races When Your Fragments is >= Settings
@@ -98,8 +98,8 @@ _G.Settings_Melee = { -- หมัดที่จะทำ
 }
 _G.FarmMastery_Settings = {
     ['Melee'] = true,
-    ['Sword'] = true,
-    ['DevilFruits'] = false,
+    ['Sword'] = false,
+    ['DevilFruits'] = true,
     ['Select_Swords'] = {
         ["AutoSettings"] = true, -- ถ้าเปิดอันนี้มันจะเลือกดาบให้เองหรือฟาร์มทุกดาบนั่นเอง
         ["ManualSettings"] = { -- ถ้าปรับ AutoSettings เป็น false มันจะฟาร์มดาบที่เลือกตรงนี้ ตัวอย่างข้างล่าง
