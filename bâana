@@ -27,7 +27,7 @@ getgenv().SettingFarm ={
     },
     ["Auto Awaken Fruit"] = false, -- dont support dough and phoenix
     ["GodHuman"] = true,
-    ["Priority Get Melee Sea 3"] = true,
+    ["Priority Get Melee Sea 3"] = false,
     ["Auto Saber"] = false,
     ["Auto Pole"] = false,
     ["Cursed Dual Katana"] = true,
@@ -44,7 +44,7 @@ getgenv().SettingFarm ={
         ["Enabled"] = true,
         ["Fragments"] = 25000
     },
-    ["Buy Haki Color Legendary"] = false, --- it will buy if u have sgt and godhuman and dont have Valkyrie Helm
+    ["Buy Haki Color Legendary"] = true, --- it will buy if u have sgt and godhuman and dont have Valkyrie Helm
     ["Select Hop"] = { -- 70% will have it
         ["Hop Find Full Moon Soul Guitar"] = true,
         ["Hop Find Rip Indra Get Tushita"] = true, --- u need have sgt and godhuman
