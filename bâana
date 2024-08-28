@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Key = "2254ee715640a172c399d48b"
+getgenv().Key = "8a816f19236ace72c26e78ea"
 getgenv().SettingFarm ={
     ["Fast Attack"] = {
         ["Speed Attack"] = 0,
