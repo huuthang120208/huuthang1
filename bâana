@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Key = "8a816f19236ace72c26e78ea"
+getgenv().Key = "2254ee715640a172c399d48b"
 getgenv().SettingFarm ={
     ["Fast Attack"] = {
         ["Speed Attack"] = 0,
@@ -65,7 +65,7 @@ getgenv().SettingFarm ={
     ["Blox Fruit Sniper"] = {},
     ["Lock Fruit"] = {},
     ["Webhook"] = {
-        ["Enabled"] = true,
+        ["Enabled"] = false,
         ["WebhookUrl"] = "https://discord.com/api/webhooks/1084193173246586920/8GcPiJzMijDTrMT8fL4zO5pMn-7Hvfgmvj-BN7s4AI-jiKqLwkxBhF2KJZ1aXyC1YXB2",
     }
 }
