@@ -24,16 +24,15 @@ _G.WebHook = {
     ["Delay"] = 60 -- วินาที
 }
 _G.Team = "Pirate" -- Marine / Pirate
-getgenv().Script_Mode = "Kaitun_Script"
 _G.MainSettings = {
         ["EnabledHOP"] = true, -- เปิด HOP ( มันไม่มีอยู่ละใส่มาเท่ๆ )
         ['FPSBOOST'] = true, -- ภาพกาก
-        ["FPSLOCKAMOUNT"] = 10, -- จำนวน FPS
+        ["FPSLOCKAMOUNT"] = 15, -- จำนวน FPS
         ['WhiteScreen'] = true, -- จอขาว
         ['CloseUI'] = true, -- ปิด Ui
         ["NotifycationExPRemove"] = true, -- ลบ ExP ที่เด้งตอนฆ่ามอน
         ['AFKCheck'] = 540, -- ถ้ายืนนิ่งเกินวิที่ตั้งมันจะรีเกม
-        ["LockFragments"] = 20000, -- ล็อคเงินม่วง
+        ["LockFragments"] = 25000, -- ล็อคเงินม่วง
         ["LockFruitsRaid"] = { -- ล็อคผลที่ไม่เอาไปลงดัน
             [1] = "Dough-Dough",
             [2] = "Dragon-Dragon",
@@ -45,19 +44,6 @@ _G.MainSettings = {
             [8] = "Spirit-Spirit",
             [9] = "Venom-Venom",
             [10] = "Kitsune-Kitsune",
-            [11] = "T-Rex-T-Rex",
-            [12] = "Mammoth-Mammoth",
-            [13] = "Gravity-Gravity",
-            [14] = "Blizzard-Blizzard",
-            [15] = "Pain-Pain",
-            [16] = "Rumble-Rumble",
-            [17] = "Portal-Portal",
-            [18] = "Phoenix-Phoenix",
-            [19] = "Sound-Sound",
-            [20] = "Spider-Spider",
-            [21] = "Love-Love",
-            [22] = "Buddha-Buddha",
-            [23] = "Quake-Quake"
         }
     }
 _G.Fruits_Settings = { -- ตั้งค่าผล
@@ -81,10 +67,10 @@ _G.Races_Settings = { -- ตั้งค่าเผ่า
         ["Races_Lock"] = {
             ["Races"] = { -- Select Races U want
                 ["Mink"] = true,
-                ["Human"] = false,
+                ["Human"] = true,
                 ["Fishman"] = false,
             },
-            ["RerollsWhenFragments"] = 20000 -- Random Races When Your Fragments is >= Settings
+            ["RerollsWhenFragments"] = 25000 -- Random Races When Your Fragments is >= Settings
         }
     }
 }
@@ -98,8 +84,8 @@ _G.Settings_Melee = { -- หมัดที่จะทำ
 }
 _G.FarmMastery_Settings = {
     ['Melee'] = true,
-    ['Sword'] = false,
-    ['DevilFruits'] = true,
+    ['Sword'] = true,
+    ['DevilFruits'] = false,
     ['Select_Swords'] = {
         ["AutoSettings"] = true, -- ถ้าเปิดอันนี้มันจะเลือกดาบให้เองหรือฟาร์มทุกดาบนั่นเอง
         ["ManualSettings"] = { -- ถ้าปรับ AutoSettings เป็น false มันจะฟาร์มดาบที่เลือกตรงนี้ ตัวอย่างข้างล่าง
@@ -134,5 +120,5 @@ _G.GunSettings = { -- ปืนที่จะทำ
 }
 getgenv().Key = "MARU-MM0CI-RDHVY-ILOA-PRB29-RBGD0"
 getgenv().id = "1084122060307050586"
+getgenv().Script_Mode = "Kaitun_Script"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
-
