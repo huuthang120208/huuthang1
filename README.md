@@ -1,7 +1,10 @@
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
-local PlaceId = 2753915549 
+
+local PlaceId = 2753915549  -- PlaceId của Blox Fruits
+
+-- Hàm lấy danh sách server và lọc theo thời gian tồn tại
 local function GetServerList(cursor)
     local url = "https://games.roblox.com/v1/games/" .. PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
     if cursor then
@@ -19,6 +22,8 @@ local function GetServerList(cursor)
         return nil
     end
 end
+
+-- Hàm kiểm tra xem số người chơi có thay đổi không
 local function CheckServerPlayerCount(serverId, initialPlayerCount)
     local url = "https://games.roblox.com/v1/servers/" .. serverId
     local success, result = pcall(function()
@@ -31,27 +36,37 @@ local function CheckServerPlayerCount(serverId, initialPlayerCount)
         return false
     end
 end
+
+-- Hàm tham gia server
 local function JoinLowPlayerServer()
     local cursor = nil
     local serverFound = false
-    while not serverFound do
+    local checkedServers = 0  -- Đếm số lượng server đã kiểm tra
+
+    while not serverFound and checkedServers < 50 do  -- Giới hạn số server được kiểm tra
         local servers = GetServerList(cursor)
+
         if servers and servers.data then
             for _, server in ipairs(servers.data) do
+                -- Kiểm tra server có ít người chơi (1 hoặc 2 người)
                 if server.playing <= 2 then
                     local initialPlayerCount = server.playing
                     print("Đang kiểm tra server ID: " .. server.id .. " với số người chơi ban đầu: " .. initialPlayerCount)
+
+                    -- Kiểm tra trong 5 giây nếu số người chơi không thay đổi (giảm thời gian kiểm tra)
                     local timePassed = 0
-                    while timePassed < 10 do
+                    while timePassed < 5 do
                         if CheckServerPlayerCount(server.id, initialPlayerCount) then
-                            wait(1)
-                            timePassed = timePassed + 1
+                            wait(0.5)  -- Giảm thời gian chờ giữa các lần kiểm tra
+                            timePassed = timePassed + 0.5
                         else
                             print("Số người chơi đã thay đổi, bỏ qua server này.")
                             break
                         end
                     end
-                    if timePassed >= 10 then
+
+                    -- Nếu số người chơi không thay đổi sau 5 giây, tham gia vào server
+                    if timePassed >= 5 then
                         print("Đang tham gia vào server ID: " .. server.id)
                         TeleportService:TeleportToPlaceInstance(PlaceId, server.id, Players.LocalPlayer)
                         serverFound = true
@@ -60,16 +75,21 @@ local function JoinLowPlayerServer()
                 end
             end
         end
+
         if servers and servers.nextPageCursor then
             cursor = servers.nextPageCursor
         else
             break
         end
-        wait(1) 
+
+        checkedServers = checkedServers + 1  -- Tăng số lượng server đã kiểm tra
+        wait(0.5)  -- Giảm delay giữa các lần kiểm tra server
     end
 
     if not serverFound then
         print("Không tìm thấy server có ít người chơi.")
     end
 end
+
+-- Gọi hàm để tham gia server
 JoinLowPlayerServer()
