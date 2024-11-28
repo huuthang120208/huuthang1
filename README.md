@@ -43,7 +43,7 @@ local function JoinLowPlayerServer()
     local serverFound = false
     local checkedServers = 0  -- Đếm số lượng server đã kiểm tra
 
-    while not serverFound and checkedServers < 50 do  -- Giới hạn số server được kiểm tra
+    while not serverFound and checkedServers < 100 do  -- Giới hạn số server được kiểm tra
         local servers = GetServerList(cursor)
 
         if servers and servers.data then
@@ -53,20 +53,20 @@ local function JoinLowPlayerServer()
                     local initialPlayerCount = server.playing
                     print("Đang kiểm tra server ID: " .. server.id .. " với số người chơi ban đầu: " .. initialPlayerCount)
 
-                    -- Kiểm tra trong 5 giây nếu số người chơi không thay đổi (giảm thời gian kiểm tra)
+                    -- Kiểm tra trong 2 giây nếu số người chơi không thay đổi (giảm thời gian kiểm tra)
                     local timePassed = 0
-                    while timePassed < 5 do
+                    while timePassed < 2 do
                         if CheckServerPlayerCount(server.id, initialPlayerCount) then
-                            wait(0.5)  -- Giảm thời gian chờ giữa các lần kiểm tra
-                            timePassed = timePassed + 0.5
+                            wait(0.1)  -- Giảm thời gian chờ giữa các lần kiểm tra
+                            timePassed = timePassed + 0.1
                         else
                             print("Số người chơi đã thay đổi, bỏ qua server này.")
                             break
                         end
                     end
 
-                    -- Nếu số người chơi không thay đổi sau 5 giây, tham gia vào server
-                    if timePassed >= 5 then
+                    -- Nếu số người chơi không thay đổi sau 2 giây, tham gia vào server
+                    if timePassed >= 2 then
                         print("Đang tham gia vào server ID: " .. server.id)
                         TeleportService:TeleportToPlaceInstance(PlaceId, server.id, Players.LocalPlayer)
                         serverFound = true
