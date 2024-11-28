@@ -2,7 +2,7 @@ local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
 
-local PlaceId = 2753915549  -- PlaceId của Blox Fruits
+local PlaceId = 4442272183  -- PlaceId của Blox Fruits
 
 -- Hàm lấy danh sách server và lọc theo thời gian tồn tại
 local function GetServerList(cursor)
