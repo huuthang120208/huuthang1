@@ -1,95 +1,81 @@
 local HttpService = game:GetService("HttpService")
-local TeleportService = game:GetService("TeleportService")
-local Players = game:GetService("Players")
 
-local PlaceId = 4442272183  -- PlaceId của Blox Fruits
+-- Hàm gửi tin nhắn đến webhook
+function SendToWebhook(webhookUrl, message)
+    local http = syn and syn.request or http_request or request or nil
 
--- Hàm lấy danh sách server và lọc theo thời gian tồn tại
-local function GetServerList(cursor)
-    local url = "https://games.roblox.com/v1/games/" .. PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
-    if cursor then
-        url = url .. "&cursor=" .. cursor
+    if not http then
+        warn("Executor không hỗ trợ HTTP requests.")
+        return
     end
 
-    local success, result = pcall(function()
-        return HttpService:JSONDecode(game:HttpGet(url))
+    local payload = {
+        content = message, -- Nội dung tin nhắn
+        username = "Race Info Bot"
+    }
+
+    local success, response = pcall(function()
+        return http({
+            Url = webhookUrl,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = HttpService:JSONEncode(payload)
+        })
     end)
 
     if success then
-        return result
+        print("Tin nhắn đã được gửi thành công!")
     else
-        warn("Không thể lấy danh sách server:", result)
-        return nil
+        warn("Không thể gửi tin nhắn. Lỗi: ", response)
     end
 end
 
--- Hàm kiểm tra xem số người chơi có thay đổi không
-local function CheckServerPlayerCount(serverId, initialPlayerCount)
-    local url = "https://games.roblox.com/v1/servers/" .. serverId
-    local success, result = pcall(function()
-        return HttpService:JSONDecode(game:HttpGet(url))
-    end)
+-- Hàm kiểm tra race
+function CheckRace()
+    local v113 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "1")
+    local v111 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Alchemist", "1")
+    local playerName = game.Players.LocalPlayer.Name
+    local race = game.Players.LocalPlayer.Data.Race.Value
 
-    if success and result.data then
-        return result.data.playing == initialPlayerCount
+    if game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
+        -- Kiểm tra trạng thái của V4
+        local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
+        
+        -- Tách số gear và tier
+        local gear, tier = string.match(v4Status, "([^,]+),([^,]+)") -- Tách bằng dấu phẩy
+        
+        local raceInfo = race .. " V4 (Gear: " .. gear .. ", Tier: " .. tier .. ")"
+        
+        SendToWebhook(
+            "https://discord.com/api/webhooks/1312650928821768212/5nx2ScEE--inMxNOrk2RpAKsPKGR8YCLdrkN8C7JZT6xQkGfHmUQTY7hz1ftLeeepwqW",
+            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo
+        )
+        return raceInfo
+    elseif v113 == -2 then
+        local raceInfo = race .. " V3"
+        SendToWebhook(
+            "https://discord.com/api/webhooks/1312650732901765120/JrwPBSLg2kj9NCl1GjYyGt5C8xgZqX5rzN_eXzkiWTtexoxfDTJ31dXquMc1NT6bfimA",
+            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo
+        )
+        return raceInfo
+    elseif v111 == -2 then
+        local raceInfo = race .. " V2"
+        SendToWebhook(
+            "https://discord.com/api/webhooks/1312650557642768402/6jcRUy6tLXRLyo54I7QqtowCx8oU1VuLfDHGo1uF2BNAGa3-5Sm8I4XdV-TW_Yt_ZfR5",
+            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo
+        )
+        return raceInfo
     else
-        return false
+        local raceInfo = race .. " V1"
+        SendToWebhook(
+            "https://discord.com/api/webhooks/1312650557642768402/6jcRUy6tLXRLyo54I7QqtowCx8oU1VuLfDHGo1uF2BNAGa3-5Sm8I4XdV-TW_Yt_ZfR5",
+            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo
+        )
+        return raceInfo
     end
 end
 
--- Hàm tham gia server
-local function JoinLowPlayerServer()
-    local cursor = nil
-    local serverFound = false
-    local checkedServers = 0  -- Đếm số lượng server đã kiểm tra
-
-    while not serverFound and checkedServers < 100 do  -- Giới hạn số server được kiểm tra
-        local servers = GetServerList(cursor)
-
-        if servers and servers.data then
-            for _, server in ipairs(servers.data) do
-                -- Kiểm tra server có ít người chơi (1 hoặc 2 người)
-                if server.playing <= 2 then
-                    local initialPlayerCount = server.playing
-                    print("Đang kiểm tra server ID: " .. server.id .. " với số người chơi ban đầu: " .. initialPlayerCount)
-
-                    -- Kiểm tra trong 2 giây nếu số người chơi không thay đổi (giảm thời gian kiểm tra)
-                    local timePassed = 0
-                    while timePassed < 2 do
-                        if CheckServerPlayerCount(server.id, initialPlayerCount) then
-                            wait(0.1)  -- Giảm thời gian chờ giữa các lần kiểm tra
-                            timePassed = timePassed + 0.1
-                        else
-                            print("Số người chơi đã thay đổi, bỏ qua server này.")
-                            break
-                        end
-                    end
-
-                    -- Nếu số người chơi không thay đổi sau 2 giây, tham gia vào server
-                    if timePassed >= 2 then
-                        print("Đang tham gia vào server ID: " .. server.id)
-                        TeleportService:TeleportToPlaceInstance(PlaceId, server.id, Players.LocalPlayer)
-                        serverFound = true
-                        break
-                    end
-                end
-            end
-        end
-
-        if servers and servers.nextPageCursor then
-            cursor = servers.nextPageCursor
-        else
-            break
-        end
-
-        checkedServers = checkedServers + 1  -- Tăng số lượng server đã kiểm tra
-        wait(0.5)  -- Giảm delay giữa các lần kiểm tra server
-    end
-
-    if not serverFound then
-        print("Không tìm thấy server có ít người chơi.")
-    end
-end
-
--- Gọi hàm để tham gia server
-JoinLowPlayerServer()
+-- Thực thi hàm kiểm tra
+CheckRace()
