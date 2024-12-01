@@ -24,6 +24,8 @@ function CheckRace()
     local statusMessage = ""
     if v229 == 1 then
      statusMessage = "Required Train More , ( gear ??? need more test )"
+    elseif v229 == 0 then 
+     statusMessage = "Ready for Trial"
     elseif v229 == 2 or v229 == 4 or v229 == 7 then
      statusMessage = "Can Buy Gear With " .. v227 .. " Fragments ( gear 2 )"
     elseif v229 == 3 then
