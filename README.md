@@ -78,9 +78,9 @@ end
 function scriptautov4()
     _G.Team = "Marine" -- Marine / Pirate
     _G.Settings_V4 = {
-        ["LockTiers"] = 6, 
+        ["LockTiers"] = 11, 
         ["Lever"] = true, 
-        ["InVIPServ"] = true, 
+        ["InVIPServ"] = false, 
         ["HelperNameList"] = { 
             "VN5ByLx5",
             "InezHarrellbdys38751"
