@@ -64,7 +64,17 @@ function CheckRace()
 
     -- Kiểm tra trạng thái V4
     local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
+    if not v4Status then
+        warn("Không thể lấy được trạng thái V4.")
+        return
+    end
+
+    -- Tách giá trị Gear và Tier từ v4Status nếu có
     local v4Gear, v4Tier = string.match(v4Status, "([0-9]+) ([0-9]+)")
+    if not v4Gear or not v4Tier then
+        warn("Không thể tách thông tin Gear và Tier từ trạng thái V4.")
+        return
+    end
 
     -- Lấy trạng thái của Ancient One
     local ancientStatus = CheckAcientOneStatus()
