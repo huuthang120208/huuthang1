@@ -1,3 +1,4 @@
+
 local HttpService = game:GetService("HttpService")
 function SendToWebhook(webhookUrl, message)
     local http = syn and syn.request or http_request or request or nil
@@ -78,9 +79,9 @@ end
 function scriptautov4()
     _G.Team = "Marine" -- Marine / Pirate
     _G.Settings_V4 = {
-        ["LockTiers"] = 11, 
+        ["LockTiers"] = 6, 
         ["Lever"] = true, 
-        ["InVIPServ"] = false, 
+        ["InVIPServ"] = true, 
         ["HelperNameList"] = { 
             "VN5ByLx5",
             "InezHarrellbdys38751"
