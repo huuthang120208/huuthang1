@@ -45,8 +45,8 @@ function CheckRace()
         
         -- Kiểm tra và xử lý v4Status
         if v4Status then
-            -- Tách gear và tier từ v4Status (giả sử v4Status có dạng "5 10")
-            local gear, tier = string.match(v4Status, "([^%s]+)%s([^%s]+)")  -- Tách bằng dấu cách
+            -- Tách 2 số đầu tiên từ v4Status, bất kể ký tự gì ngăn cách
+            local gear, tier = string.match(v4Status, "([%d]+)[^%d]+([%d]+)")  -- Tìm 2 số liền nhau
             
             if gear and tier then
                 local raceInfo = race .. " V4 (Gear: " .. gear .. ", Tier: " .. tier .. ")"
