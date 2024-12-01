@@ -60,19 +60,19 @@ function CheckRace()
     v229, v228, v227 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
     local statusMessage = ""
     if v229 == 1 then
-     statusMessage = "Required Train More , ( gear 1 ? maybe )"
+     statusMessage = "Required Train More , ( gear ??? need more test )"
     elseif v229 == 2 or v229 == 4 or v229 == 7 then
-     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments"
+     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments ( gear 2 )"
     elseif v229 == 3 then
-     statusMessage = "Required Train More ( gear 2 ? maybe )"
+     statusMessage = "Required Train More ( gear ??? need more test )"
     elseif v229 == 5 then
-     statusMessage = "You Are Done Your Race. ( full gear ??)"
+     statusMessage = "You Are Done Your Race. ( full gear t10 )"
     elseif v229 == 6 then
-     statusMessage = "Upgrades completed: " .. v228 - 2 .. "/3, Need Trains More ( cái này là gear 3 )"
+     statusMessage = "Upgrades completed: " .. v228 - 2 .. "/3, Need Trains More ( gear 3 )"
     elseif v229 == 8 then
-     statusMessage = "Remaining " .. 10 - v228 .. " training sessions."
+     statusMessage = "Remaining " .. 10 - v228 .. " training sessions. ( full gear )" 
     else
-     statusMessage = "You have yet to achieve greatness"
+     statusMessage = "(Đéo đủ trình độ)"
     end
     local v113 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "1")
     local v111 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Alchemist", "1")
