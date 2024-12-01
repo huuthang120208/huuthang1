@@ -43,16 +43,24 @@ function CheckRace()
         -- Kiểm tra trạng thái của V4
         local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
         
-        -- Tách số gear và tier
-        local gear, tier = string.match(v4Status, "([^,]+),([^,]+)") -- Tách bằng dấu phẩy
-        
-        local raceInfo = race .. " V4 (Gear: " .. gear .. ", Tier: " .. tier .. ")"
-        
-        SendToWebhook(
-            "https://discord.com/api/webhooks/1312650928821768212/5nx2ScEE--inMxNOrk2RpAKsPKGR8YCLdrkN8C7JZT6xQkGfHmUQTY7hz1ftLeeepwqW",
-            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo
-        )
-        return raceInfo
+        -- Kiểm tra và xử lý v4Status
+        if v4Status then
+            -- Tách gear và tier từ v4Status (giả sử v4Status có dạng "5 10")
+            local gear, tier = string.match(v4Status, "([^%s]+)%s([^%s]+)")  -- Tách bằng dấu cách
+            
+            if gear and tier then
+                local raceInfo = race .. " V4 (Gear: " .. gear .. ", Tier: " .. tier .. ")"
+                SendToWebhook(
+                    "https://discord.com/api/webhooks/1312650928821768212/5nx2ScEE--inMxNOrk2RpAKsPKGR8YCLdrkN8C7JZT6xQkGfHmUQTY7hz1ftLeeepwqW",
+                    "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo
+                )
+                return raceInfo
+            else
+                warn("Lỗi: v4Status không có định dạng hợp lệ.")
+            end
+        else
+            warn("Lỗi: Không thể lấy v4Status.")
+        end
     elseif v113 == -2 then
         local raceInfo = race .. " V3"
         SendToWebhook(
