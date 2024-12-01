@@ -1,3 +1,23 @@
+local v227, v228, v229 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
+local statusMessage = ""
+if v229 == 1 then
+    statusMessage = "Required Train More , ( gear 1 ? maybe )"
+elseif v229 == 2 or v229 == 4 or v229 == 7 then
+    statusMessage = "Can Buy Gear With " .. v227 .. " Fragments"
+elseif v229 == 3 then
+    statusMessage = "Required Train More ( gear 2 ? maybe )"
+elseif v229 == 5 then
+    statusMessage = "You Are Done Your Race. ( full gear ??)"
+elseif v229 == 6 then
+    statusMessage = "Upgrades completed: " .. v228 - 2 .. "/3, Need Trains More ( cái này là gear 3 )"
+elseif v229 == 0 then
+    statusMessage = "Ready For Trial"
+elseif v229 == 8 then
+    statusMessage = "Remaining " .. 10 - v228 .. " training sessions. ( chắn chắc full gear)"
+else
+    statusMessage = "đéo đủ trình để vào"
+end
+
 local HttpService = game:GetService("HttpService")
 
 -- Hàm gửi tin nhắn đến webhook
@@ -34,20 +54,38 @@ end
 
 -- Hàm kiểm tra race
 function CheckRace()
+    local v227, v228, v229 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
+    local statusMessage = ""
+    if v229 == 1 then
+     statusMessage = "Required Train More , ( gear 1 ? maybe )"
+    elseif v229 == 2 or v229 == 4 or v229 == 7 then
+     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments"
+    elseif v229 == 3 then
+     statusMessage = "Required Train More ( gear 2 ? maybe )"
+    elseif v229 == 5 then
+     statusMessage = "You Are Done Your Race. ( full gear ??)"
+    elseif v229 == 6 then
+     statusMessage = "Upgrades completed: " .. v228 - 2 .. "/3, Need Trains More ( cái này là gear 3 )"
+    elseif v229 == 0 then
+     statusMessage = "Ready For Trial"
+    elseif v229 == 8 then
+     statusMessage = "Remaining " .. 10 - v228 .. " training sessions. ( chắn chắc full gear)"
+    else
+     statusMessage = "đéo đủ trình để vào"
+    end
     local v113 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "1")
     local v111 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Alchemist", "1")
     local playerName = game.Players.LocalPlayer.Name
     local race = game.Players.LocalPlayer.Data.Race.Value
 
-    if game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
-        -- Kiểm tra trạng thái của V4
-        local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
-        local raceInfo = race .. " V4 (Trạng thái: " .. tostring(v4Status) .. ")"
-        SendToWebhook(
-            "https://discord.com/api/webhooks/1312650928821768212/5nx2ScEE--inMxNOrk2RpAKsPKGR8YCLdrkN8C7JZT6xQkGfHmUQTY7hz1ftLeeepwqW",
-            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo .. "\nTrạng thái V4: " .. tostring(v4Status)
-        )
-        return raceInfo
+        if game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
+            local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
+            local raceInfo = race .. " V4 (Trạng thái: " .. tostring(v4Status) .. ")"
+            SendToWebhook(
+                "https://discord.com/api/webhooks/1312650928821768212/5nx2ScEE--inMxNOrk2RpAKsPKGR8YCLdrkN8C7JZT6xQkGfHmUQTY7hz1ftLeeepwqW",
+                "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo .. "\nTrạng thái V4: " .. tostring(v4Status) .. "\nTrạng thái ancient quests : " ..  statusMessage
+            )
+            return raceInfo
     elseif v113 == -2 then
         local raceInfo = race .. " V3"
         SendToWebhook(
