@@ -39,7 +39,7 @@ function CheckRace()
         local raceInfo = race .. " V4 (Trạng thái: " .. tostring(v4Status) .. ")"
         SendToWebhook(
             "https://discord.com/api/webhooks/1312650928821768212/5nx2ScEE--inMxNOrk2RpAKsPKGR8YCLdrkN8C7JZT6xQkGfHmUQTY7hz1ftLeeepwqW",
-            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo .. "\nTrạng thái V4: " .. tostring(v4Status) .. tosring(status) 
+            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo .. "\nTrạng thái V4: " .. tostring(v4Status) 
         )
         return raceInfo
     elseif v113 == -2 then
