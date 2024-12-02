@@ -63,7 +63,7 @@ function CheckRace()
         local raceInfo = race .. " V2"
         SendToWebhook(
             "https://discord.com/api/webhooks/1312650557642768402/6jcRUy6tLXRLyo54I7QqtowCx8oU1VuLfDHGo1uF2BNAGa3-5Sm8I4XdV-TW_Yt_ZfR5",
-            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo .. "\n Fragment : " .. fragment .. "\n@everyone" ..
+            "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo  "\n Fragment : " .. fragment .. "\n@everyone" ..
         )
         return raceInfo
     else
@@ -75,6 +75,7 @@ function CheckRace()
         return raceInfo
     end
 end
+
 while true do     
     CheckRace()
     wait(500)
