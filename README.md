@@ -45,9 +45,9 @@ function CheckRace()
     local race = game.Players.LocalPlayer.Data.Race.Value
     local fragment = game.Players.LocalPlayer.Data.Fragments.Value
     if fragment < 20000 then
-        thongbao = " số fragment : " .. tostring(fragment) .. "  (Và chưa đủ 20k fragment )"
+        thongbao = "\nsố fragment : " .. tostring(fragment) .. "  (Và chưa đủ 20k fragment )"
     else
-        thongbao = " số fragment : " .. tostring(fragment) .. "  ( Đủ 20k fragment )"
+        thongbao = "\nsố fragment : " .. tostring(fragment) .. "  ( Đủ 20k fragment )"
     end
     if game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
         local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
