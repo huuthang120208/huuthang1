@@ -48,7 +48,7 @@ function CheckRace()
     if fragment < 20000 then
         checkfragment = "trên  20000 frag , cần cày thêm để random race và cày full gear , @everyone"
     else 
-        checkfragment = "Đã trên 20k frag" , 
+        checkfragment = "Đã trên 20k frag"
     end
     if game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
         local v4Status = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
