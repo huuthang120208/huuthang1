@@ -61,7 +61,7 @@ function CheckRace()
     elseif v113 == -2 then
         local raceInfo = race .. " V3"
         SendToWebhook(
-            "https://discord.com/api/webhooks/1312650732901765120/JrwPBSLg2kj9NCl1GjYyGt5C8xgZqX5rzN_eXzkiWTtexoxfDTJ31dXquMc1NT6bfimA",
+            "https://discord.com/api/webhooks/1313208538041946233/JZ8xcremwnzrrefPC7xTi9H0f45dM6qQ74ScolrBt6dJFHyai2pRYi27YclHIQHgFprl",
             "Tên người chơi: " .. playerName .. "\nThông tin: " .. raceInfo .. "\n Fragment : " .. fragment .. "\ntrạng thái Fragment : " .. checkfragment
         )
         return raceInfo
