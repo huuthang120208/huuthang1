@@ -26,12 +26,8 @@ function CheckRace()
      statusMessage = "Required Train More , ( gear 1 )"
     elseif v229 == 0 then 
      statusMessage = "Ready for Trial"
-    elseif v229 == 2 then
-     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments ( gear 1 )"
-    elseif v229 == 4 then
-     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments ( gear 2 )"
-    elseif v229 == 7 then
-     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments ( Full gear )"
+    elseif v229 == 2 or v229 == 4 or v229 == 7 then
+     statusMessage = "Can Buy Gear With " .. v227 .. " Fragments (Status 2 : gear 1 , Status 4 : gear 2 , Status 7 : full gear  )"
     elseif v229 == 3 then
      statusMessage = "Required Train More ( gear 2 )"
     elseif v229 == 5 then
@@ -41,7 +37,7 @@ function CheckRace()
     elseif v229 == 8 then
      statusMessage = "Remaining " .. 10 - v228 .. " training sessions. ( full gear )" 
     else
-     statusMessage = "Không đủ Yêu cầu" 
+     statusMessage = "(Đéo đủ trình độ)" 
     end
     local v113 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "1")
     local v111 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Alchemist", "1")
@@ -84,4 +80,8 @@ function CheckRace()
         return raceInfo
     end
 end
-CheckRace()
+
+while true do     
+    CheckRace()
+    wait(500)
+end
